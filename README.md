@@ -2,6 +2,7 @@
 
 [![Join the chat at https://gitter.im/ngx-smart-form/Lobby](https://badges.gitter.im/ngx-smart-form/Lobby.svg)](https://gitter.im/ngx-smart-form/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![npm version](https://badge.fury.io/js/ngx-smart-form.svg)](https://badge.fury.io/js/ngx-smart-form)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7dc4d76f7186b0c1122b/maintainability)](https://codeclimate.com/github/sergot/ngx-smart-form/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7dc4d76f7186b0c1122b/test_coverage)](https://codeclimate.com/github/sergot/ngx-smart-form/test_coverage)
 [![Build Status](https://travis-ci.org/sergot/ngx-smart-form.svg?branch=master)](https://travis-ci.org/sergot/ngx-smart-form)
