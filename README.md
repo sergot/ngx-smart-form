@@ -11,6 +11,10 @@ ngx-smart-form is an Angular module for generating forms in your application.
 - generates correct angular form based on provided settings
 - ...
 
+# Installation
+
+    npm install --save-dev ngx-smart-form
+
 # Usage
 
     <ngx-smart-form [settings]="settings" (onSubmit)="onSubmit($event)"></ngx-smart-form>
@@ -36,6 +40,7 @@ and onSubmit:
 
 - custom classes
 - custom buttons
+- generating forms based on passed model
 
 # TODOs
 
