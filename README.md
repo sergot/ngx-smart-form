@@ -40,10 +40,8 @@ and onSubmit:
 # TODOs
 
 - Docs
-- Travis
-- Ghpages
-- Codeclimate
-- E2E - protractor
+- Ghpages - better example site
+- E2E tests - protractor
 
 ## Thanks to
 
