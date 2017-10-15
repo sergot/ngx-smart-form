@@ -24,7 +24,7 @@ export class SmartFormComponent implements OnInit {
 
   @Output() onSubmit = new EventEmitter<any>();
 
-  inputs = [];
+  inputs: any[] = [];
 
   smartForm: FormGroup;
 
