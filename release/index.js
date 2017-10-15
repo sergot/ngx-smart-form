@@ -88,7 +88,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "body {\n  color: black; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -1351,7 +1351,7 @@ __export(__webpack_require__("./src/components/smart-form.component.ts"));
 /***/ "./src/components/smart-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <form [formGroup]=\"smartForm\" (ngSubmit)=\"callOnSubmit()\">\r\n    <div *ngFor=\"let input of inputs\" class=\"form-group\">\r\n      <label [for]=\"input.name\">{{ input.label }}</label>\r\n      <input [formControlName]=\"input.name\" [name]=\"input.name\" [id]=\"input.name\" [type]=\"input.type\" [placeholder]=\"input.placeholder || ''\"\r\n        class=\"form-control\">\r\n    </div>\r\n    <button class=\"btn btn-primary\" type=\"submit\">{{ settings.buttons.submit.value }}</button>\r\n  </form>\r\n</div>"
+module.exports = "<form [formGroup]=\"smartForm\" (ngSubmit)=\"callOnSubmit()\">\r\n  <div *ngFor=\"let input of inputs\" class=\"form-group\">\r\n    <label [for]=\"input.name\">{{ input.label }}</label>\r\n    <input [formControlName]=\"input.name\" [name]=\"input.name\" [id]=\"input.name\" [type]=\"input.type\" [placeholder]=\"input.placeholder || ''\"\r\n      class=\"form-control\">\r\n  </div>\r\n  <button class=\"btn btn-primary\" type=\"submit\">{{ settings.buttons.submit.value }}</button>\r\n</form>"
 
 /***/ }),
 
