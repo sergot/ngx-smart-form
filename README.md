@@ -9,6 +9,8 @@
 
 ngx-smart-form is an Angular module for generating forms in your application.
 
+Work still in progress - help will be appreciated. :)
+
 # Features
 
 - generates correct angular form based on provided settings
