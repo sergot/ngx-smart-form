@@ -13,36 +13,23 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
     }
   ],
   template: `
-    <div>
-      <div>
-        <p *ngFor="let c of cars">{{ c.client }} - {{ c.licensePlate }}</p>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a href="#" class="nav-link" [class.active]="state === ''" (click)="state = ''">Basic</a>
+            </li>
+          </ul>
+        </nav>
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+          <basic-demo *ngIf="!state"></basic-demo>
+        </main>
       </div>
-      <ngx-smart-form [settings]="settings" (onSubmit)="onSubmit($event)"></ngx-smart-form>
     </div>
   `
 })
 export class AppComponent {
-  cars = [];
-
-  settings = {
-    inputs: {
-      client: {
-        label: 'Właściciel',
-        type: 'text',
-      },
-      licensePlate: {
-        label: 'Rejestracja',
-        type: 'text',
-      },
-    },
-
-    // XXX: more buttons
-    buttons: {
-      submit: {
-        value: 'Wyślij',
-      }
-    }
-  };
 
   get state() {
     return window.state;
@@ -56,10 +43,6 @@ export class AppComponent {
 
   constructor(location: Location) {
     this.state = location.path(true);
-  }
-
-  onSubmit(form) {
-    this.cars.push(form);
   }
 
 }
