@@ -19,25 +19,6 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/@angular/core.es5
 var common_1 = __webpack_require__("./node_modules/@angular/common/@angular/common.es5.js");
 var AppComponent = /** @class */ (function () {
     function AppComponent(location) {
-        this.cars = [];
-        this.settings = {
-            inputs: {
-                client: {
-                    label: 'Właściciel',
-                    type: 'text',
-                },
-                licensePlate: {
-                    label: 'Rejestracja',
-                    type: 'text',
-                },
-            },
-            // XXX: more buttons
-            buttons: {
-                submit: {
-                    value: 'Wyślij',
-                }
-            }
-        };
         this.version = "0.0.1";
         this.state = location.path(true);
     }
@@ -51,9 +32,6 @@ var AppComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    AppComponent.prototype.onSubmit = function (form) {
-        this.cars.push(form);
-    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-demo',
@@ -65,13 +43,69 @@ var AppComponent = /** @class */ (function () {
                     useClass: common_1.HashLocationStrategy
                 }
             ],
-            template: "\n    <div>\n      <div>\n        <p *ngFor=\"let c of cars\">{{ c.client }} - {{ c.licensePlate }}</p>\n      </div>\n      <ngx-smart-form [settings]=\"settings\" (onSubmit)=\"onSubmit($event)\"></ngx-smart-form>\n    </div>\n  "
+            template: "\n    <div class=\"container-fluid\">\n      <div class=\"row\">\n        <nav class=\"col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar\">\n          <ul class=\"nav nav-pills flex-column\">\n            <li class=\"nav-item\">\n              <a href=\"#\" class=\"nav-link\" [class.active]=\"state === ''\" (click)=\"state = ''\">Basic</a>\n            </li>\n          </ul>\n        </nav>\n        <main class=\"col-sm-9 ml-sm-auto col-md-10 pt-3\">\n          <basic-demo *ngIf=\"!state\"></basic-demo>\n        </main>\n      </div>\n    </div>\n  "
         }),
         __metadata("design:paramtypes", [common_1.Location])
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
+
+
+/***/ }),
+
+/***/ "./demo/basic/basic.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
+var BasicComponent = /** @class */ (function () {
+    function BasicComponent() {
+        this.cars = [];
+        this.settings = {
+            inputs: {
+                client: {
+                    label: 'Owner',
+                    type: 'text',
+                },
+                licensePlate: {
+                    label: 'License Plate',
+                    type: 'text',
+                },
+            },
+            // XXX: more buttons
+            buttons: {
+                submit: {
+                    value: 'Add',
+                }
+            }
+        };
+    }
+    BasicComponent.prototype.onSubmit = function (form) {
+        this.cars.push(form);
+    };
+    BasicComponent = __decorate([
+        core_1.Component({
+            // tslint:disable-next-line:component-selector
+            selector: 'basic-demo',
+            template: "\n    <div>\n      <div class=\"row\">\n        <div class=\"col-sm-12\">\n          <h3>Basic Example</h3>\n          <p>This example shows the simpliest form with a simple action onSubmit().</p>\n          <ngx-smart-form [settings]=\"settings\" (onSubmit)=\"onSubmit($event)\"></ngx-smart-form>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-sm-12\">\n          <p>Add something using above form to see the result here:</p>\n          <p>List of cars: {{ cars | json }}</p>\n        </div>\n      </div>\n    </div>\n  "
+        }),
+        __metadata("design:paramtypes", [])
+    ], BasicComponent);
+    return BasicComponent;
+}());
+exports.BasicComponent = BasicComponent;
 
 
 /***/ }),
@@ -136,13 +170,15 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/@angular/core.es5
 var platform_browser_1 = __webpack_require__("./node_modules/@angular/platform-browser/@angular/platform-browser.es5.js");
 var src_1 = __webpack_require__("./src/index.ts");
 var app_component_1 = __webpack_require__("./demo/app.component.ts");
+var basic_component_1 = __webpack_require__("./demo/basic/basic.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             declarations: [
-                app_component_1.AppComponent
+                app_component_1.AppComponent,
+                basic_component_1.BasicComponent
             ],
             imports: [platform_browser_1.BrowserModule, src_1.NgxSmartFormModule],
             bootstrap: [app_component_1.AppComponent]
@@ -6351,7 +6387,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "body {\n  color: black; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -6458,7 +6494,7 @@ __export(__webpack_require__("./src/components/smart-form.component.ts"));
 /***/ "./src/components/smart-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <form [formGroup]=\"smartForm\" (ngSubmit)=\"callOnSubmit()\">\r\n    <div *ngFor=\"let input of inputs\" class=\"form-group\">\r\n      <label [for]=\"input.name\">{{ input.label }}</label>\r\n      <input [formControlName]=\"input.name\" [name]=\"input.name\" [id]=\"input.name\" [type]=\"input.type\" [placeholder]=\"input.placeholder || ''\"\r\n        class=\"form-control\">\r\n    </div>\r\n    <button class=\"btn btn-primary\" type=\"submit\">{{ settings.buttons.submit.value }}</button>\r\n  </form>\r\n</div>"
+module.exports = "<form [formGroup]=\"smartForm\" (ngSubmit)=\"callOnSubmit()\">\r\n  <div *ngFor=\"let input of inputs\" class=\"form-group\">\r\n    <label [for]=\"input.name\">{{ input.label }}</label>\r\n    <input [formControlName]=\"input.name\" [name]=\"input.name\" [id]=\"input.name\" [type]=\"input.type\" [placeholder]=\"input.placeholder || ''\"\r\n      class=\"form-control\">\r\n  </div>\r\n  <button class=\"btn btn-primary\" type=\"submit\">{{ settings.buttons.submit.value }}</button>\r\n</form>"
 
 /***/ }),
 
