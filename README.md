@@ -2,6 +2,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/7dc4d76f7186b0c1122b/maintainability)](https://codeclimate.com/github/sergot/ngx-smart-form/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/7dc4d76f7186b0c1122b/test_coverage)](https://codeclimate.com/github/sergot/ngx-smart-form/test_coverage)
+[![Build Status](https://travis-ci.org/sergot/ngx-smart-form.svg?branch=master)](https://travis-ci.org/sergot/ngx-smart-form)
 
 ngx-smart-form is an Angular module for generating forms in your application.
 
