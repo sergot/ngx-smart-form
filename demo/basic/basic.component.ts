@@ -27,9 +27,13 @@ export class BasicComponent {
 
   settings = {
     inputs: {
-      client: {
+      ownerId: {
         label: 'Owner',
-        type: 'text',
+        type: 'select',
+        data: [
+          { value: '1', text: 'Jon Snow' },
+          { value: '2', text: 'John Snow' },
+        ],
       },
       licensePlate: {
         label: 'License Plate',
