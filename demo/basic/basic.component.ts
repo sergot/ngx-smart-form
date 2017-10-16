@@ -40,13 +40,6 @@ export class BasicComponent {
         type: 'text',
       },
     },
-
-    // XXX: more buttons
-    buttons: {
-      submit: {
-        value: 'Add',
-      }
-    }
   };
 
   constructor() { }
