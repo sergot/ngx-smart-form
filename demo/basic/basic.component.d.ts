@@ -15,11 +15,6 @@ export declare class BasicComponent {
                 type: string;
             };
         };
-        buttons: {
-            submit: {
-                value: string;
-            };
-        };
     };
     constructor();
     onSubmit(form: any): void;
