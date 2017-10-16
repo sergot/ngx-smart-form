@@ -8,6 +8,8 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 
+import { NgxSmartFormSettings, NgxSmartFormInput } from '../interfaces';
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'ngx-smart-form',
@@ -20,19 +22,34 @@ import {
   // }
 })
 export class SmartFormComponent implements OnInit {
-  @Input() settings: any;
+  @Input() settings: NgxSmartFormSettings;
 
   @Output() onSubmit = new EventEmitter<any>();
 
-  inputs: any[] = [];
+  inputs: NgxSmartFormInput[] = [];
 
   smartForm: FormGroup;
+
+  // XXX: add custom classes
+  defaultSettings: NgxSmartFormSettings = {
+    // XXX: should we have default values here?
+    inputs: {},
+
+    // XXX: add custom buttons
+    buttons: {
+      submit: {
+        value: 'Submit',
+      },
+    },
+  };
 
   constructor(
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.settings = this.extendObject(this.settings, this.defaultSettings);
+
     this.smartForm = this.formBuilder.group({});
 
     for (const name in this.settings.inputs) {
@@ -40,6 +57,8 @@ export class SmartFormComponent implements OnInit {
         const input = this.settings.inputs[name];
         input.name = name;
         this.inputs.push(input);
+
+        // XXX: allow default value (forms that edit an object)
         this.smartForm.addControl(input.name, new FormControl());
       }
     }
@@ -47,5 +66,32 @@ export class SmartFormComponent implements OnInit {
 
   callOnSubmit() {
     this.onSubmit.emit(this.smartForm.value);
+  }
+
+  // XXX: this should be more advanced
+  private extendObject(dest: NgxSmartFormSettings, source: NgxSmartFormSettings): NgxSmartFormSettings {
+    if (!dest.inputs) {
+      dest.inputs = source.inputs;
+    }
+    // XXX: do we want to force input types?
+    // else {
+    //   for (const name in dest) {
+    //     if (dest.hasOwnProperty(name)) {
+    //       var element = dest[name];
+    //       if (!element.type) {
+    //         element.type = 'text';
+    //       }
+    //       if (!element.label) {
+    //         element.label = name;
+    //       }
+    //     }
+    //   }
+    // }
+
+    if (!dest.buttons) {
+      dest.buttons = source.buttons;
+    }
+
+    return dest;
   }
 }
