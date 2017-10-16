@@ -7,20 +7,57 @@ var SmartFormComponent = /** @class */ (function () {
         this.formBuilder = formBuilder;
         this.onSubmit = new core_1.EventEmitter();
         this.inputs = [];
+        // XXX: add custom classes
+        this.defaultSettings = {
+            // XXX: should we have default values here?
+            inputs: {},
+            // XXX: add custom buttons
+            buttons: {
+                submit: {
+                    value: 'Submit',
+                },
+            },
+        };
     }
     SmartFormComponent.prototype.ngOnInit = function () {
+        this.settings = this.extendObject(this.settings, this.defaultSettings);
         this.smartForm = this.formBuilder.group({});
         for (var name_1 in this.settings.inputs) {
             if (this.settings.inputs.hasOwnProperty(name_1)) {
                 var input = this.settings.inputs[name_1];
                 input.name = name_1;
                 this.inputs.push(input);
+                // XXX: allow default value (forms that edit an object)
                 this.smartForm.addControl(input.name, new forms_1.FormControl());
             }
         }
     };
     SmartFormComponent.prototype.callOnSubmit = function () {
         this.onSubmit.emit(this.smartForm.value);
+    };
+    // XXX: this should be more advanced
+    SmartFormComponent.prototype.extendObject = function (dest, source) {
+        if (!dest.inputs) {
+            dest.inputs = source.inputs;
+        }
+        // XXX: do we want to force input types?
+        // else {
+        //   for (const name in dest) {
+        //     if (dest.hasOwnProperty(name)) {
+        //       var element = dest[name];
+        //       if (!element.type) {
+        //         element.type = 'text';
+        //       }
+        //       if (!element.label) {
+        //         element.label = name;
+        //       }
+        //     }
+        //   }
+        // }
+        if (!dest.buttons) {
+            dest.buttons = source.buttons;
+        }
+        return dest;
     };
     SmartFormComponent.decorators = [
         { type: core_1.Component, args: [{

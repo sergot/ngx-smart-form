@@ -1,5 +1,5 @@
 /**
- * angular2-data-table v"0.0.1" (https://github.com/swimlane/angular2-data-table)
+ * angular2-data-table v"0.1.0" (https://github.com/swimlane/angular2-data-table)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -1351,7 +1351,7 @@ __export(__webpack_require__("./src/components/smart-form.component.ts"));
 /***/ "./src/components/smart-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form [formGroup]=\"smartForm\" (ngSubmit)=\"callOnSubmit()\">\r\n  <div *ngFor=\"let input of inputs\" class=\"form-group\">\r\n    <label [for]=\"input.name\">{{ input.label }}</label>\r\n    <input [formControlName]=\"input.name\" [name]=\"input.name\" [id]=\"input.name\" [type]=\"input.type\" [placeholder]=\"input.placeholder || ''\"\r\n      class=\"form-control\">\r\n  </div>\r\n  <button class=\"btn btn-primary\" type=\"submit\">{{ settings.buttons.submit.value }}</button>\r\n</form>"
+module.exports = "<form [formGroup]=\"smartForm\" (ngSubmit)=\"callOnSubmit()\">\r\n  <div *ngFor=\"let input of inputs\" class=\"form-group\">\r\n    <label [for]=\"input.name\">{{ input.label }}</label>\r\n\r\n    <select *ngIf=\"input.type === 'select'\" [formControlName]=\"input.name\" class=\"form-control\">\r\n      <option *ngFor=\"let i of input.data\" [value]=\"i.value\">{{ i.text }}</option>\r\n    </select>\r\n\r\n    <input *ngIf=\"input.type === 'text'\" [formControlName]=\"input.name\" [name]=\"input.name\" [id]=\"input.name\" [type]=\"input.type\"\r\n      [placeholder]=\"input.placeholder || ''\" class=\"form-control\">\r\n  </div>\r\n  <button class=\"btn btn-primary\" type=\"submit\">{{ settings.buttons.submit.value }}</button>\r\n</form>"
 
 /***/ }),
 
@@ -1392,20 +1392,57 @@ var SmartFormComponent = /** @class */ (function () {
         this.formBuilder = formBuilder;
         this.onSubmit = new core_1.EventEmitter();
         this.inputs = [];
+        // XXX: add custom classes
+        this.defaultSettings = {
+            // XXX: should we have default values here?
+            inputs: {},
+            // XXX: add custom buttons
+            buttons: {
+                submit: {
+                    value: 'Submit',
+                },
+            },
+        };
     }
     SmartFormComponent.prototype.ngOnInit = function () {
+        this.settings = this.extendObject(this.settings, this.defaultSettings);
         this.smartForm = this.formBuilder.group({});
         for (var name_1 in this.settings.inputs) {
             if (this.settings.inputs.hasOwnProperty(name_1)) {
                 var input = this.settings.inputs[name_1];
                 input.name = name_1;
                 this.inputs.push(input);
+                // XXX: allow default value (forms that edit an object)
                 this.smartForm.addControl(input.name, new forms_1.FormControl());
             }
         }
     };
     SmartFormComponent.prototype.callOnSubmit = function () {
         this.onSubmit.emit(this.smartForm.value);
+    };
+    // XXX: this should be more advanced
+    SmartFormComponent.prototype.extendObject = function (dest, source) {
+        if (!dest.inputs) {
+            dest.inputs = source.inputs;
+        }
+        // XXX: do we want to force input types?
+        // else {
+        //   for (const name in dest) {
+        //     if (dest.hasOwnProperty(name)) {
+        //       var element = dest[name];
+        //       if (!element.type) {
+        //         element.type = 'text';
+        //       }
+        //       if (!element.label) {
+        //         element.label = name;
+        //       }
+        //     }
+        //   }
+        // }
+        if (!dest.buttons) {
+            dest.buttons = source.buttons;
+        }
+        return dest;
     };
     __decorate([
         core_1.Input(),
