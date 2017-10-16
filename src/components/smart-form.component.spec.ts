@@ -1,11 +1,53 @@
-import { TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SmartFormComponent } from './smart-form.component';
 import { NgxSmartFormModule } from '../ngx-smart-form.module';
+
+let comp: SmartFormComponent;
+let fixture: ComponentFixture<SmartFormComponent>;
+let page: Page;
+
+class Page {
+  submitBtn: DebugElement;
+  inputs: DebugElement[];
+  labels: DebugElement[];
+
+  constructor() { }
+
+  addPageElements() {
+    if (comp.settings) {
+      // const buttons = fixture.debugElement.queryAll(By.css('button'));
+      this.submitBtn = fixture.debugElement.query(By.css('button'));
+      // this.submitBtn = buttons[0];
+      this.inputs = fixture.debugElement.queryAll(By.css('input'));
+      this.labels = fixture.debugElement.queryAll(By.css('label'));
+    }
+  }
+}
+
+function createComponent(settings) {
+  fixture = TestBed.createComponent(SmartFormComponent);
+  comp = fixture.componentInstance;
+  page = new Page();
+
+  comp.settings = settings;
+
+  fixture.detectChanges();
+  return fixture.whenStable().then(() => {
+    fixture.detectChanges();
+    page.addPageElements();
+  });
+}
+
 describe('SmartForm component', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NgxSmartFormModule]
+      imports: [NgxSmartFormModule, FormsModule, ReactiveFormsModule],
+      declarations: [],
     });
   });
 
@@ -14,28 +56,44 @@ describe('SmartForm component', () => {
   }));
 
   // XXX: more tests
-  describe('When settings are defined', () => {
-    it('should transform settings to inputs', () => {
-      const fixture = TestBed.createComponent(SmartFormComponent);
+  describe('When full settings are defined', () => {
+    beforeEach(async(() => {
       const settings = {
         inputs: {
           field: {
             label: 'Field',
-            type: 'text'
-          }
+            type: 'text',
+          },
         },
+
         buttons: {
           submit: {
-            value: 'Send'
-          }
-        }
+            value: 'Save',
+          },
+        },
       };
 
-      fixture.componentInstance.settings = settings;
+      createComponent(settings);
+    }));
 
+    it('should transform settings.inputs object into inputs array', () => {
       fixture.detectChanges();
 
-      expect(fixture.componentInstance.inputs[0].name).toBe('field');
+      expect(comp.inputs.length).toBe(1);
+      expect(comp.inputs[0].name).toBe('field');
+      expect(comp.inputs[0].label).toBe('Field');
+      expect(comp.inputs[0].type).toBe('text');
+    });
+
+    it('should have submit name different than default', () => {
+      expect(page.submitBtn.nativeElement.innerText).toBe('Save');
+    });
+
+    it('should generate form with inputs and labels', () => {
+      const howMany = Object.keys(comp.settings.inputs).length;
+
+      expect(page.labels.length).toBe(howMany);
+      expect(page.inputs.length).toBe(howMany);
     });
   });
 
