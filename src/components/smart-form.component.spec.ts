@@ -19,9 +19,7 @@ class Page {
 
   addPageElements() {
     if (comp.settings) {
-      // const buttons = fixture.debugElement.queryAll(By.css('button'));
       this.submitBtn = fixture.debugElement.query(By.css('button'));
-      // this.submitBtn = buttons[0];
       this.inputs = fixture.debugElement.queryAll(By.css('input'));
       this.labels = fixture.debugElement.queryAll(By.css('label'));
     }
@@ -105,6 +103,20 @@ describe('SmartForm component', () => {
       page.submitBtn.nativeElement.click();
 
       expect(comp.onSubmit.emit).toHaveBeenCalledWith({ field: value });
+    });
+  });
+
+  describe('When full settings are defined', () => {
+    beforeEach(async(() => {
+      const settings = {};
+
+      createComponent(settings);
+    }));
+
+    it('should use default settings', () => {
+      expect(Object.keys(comp.settings.inputs).length).toBe(0);
+      expect(comp.inputs.length).toBe(0);
+      expect(comp.settings.buttons['submit'].value).toBe('Submit');
     });
   });
 
