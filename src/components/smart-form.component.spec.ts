@@ -95,6 +95,17 @@ describe('SmartForm component', () => {
       expect(page.labels.length).toBe(howMany);
       expect(page.inputs.length).toBe(howMany);
     });
+
+    it('should emit even on submit', () => {
+      spyOn(comp.onSubmit, 'emit');
+      const value = 'John Lemon';
+
+      comp.smartForm.controls['field'].setValue(value);
+      fixture.detectChanges();
+      page.submitBtn.nativeElement.click();
+
+      expect(comp.onSubmit.emit).toHaveBeenCalledWith({ field: value });
+    });
   });
 
 });
