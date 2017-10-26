@@ -20,10 +20,14 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
             <li class="nav-item">
               <a href="#" class="nav-link" [class.active]="state === ''" (click)="state = ''">Basic</a>
             </li>
+            <li class="nav-item">
+              <a href="#validators" class="nav-link" [class.active]="state === 'validators'" (click)="state = 'validators'">Validators</a>
+            </li>
           </ul>
         </nav>
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3">
           <basic-demo *ngIf="!state"></basic-demo>
+          <validators-demo *ngIf="state === 'validators'"></validators-demo>
         </main>
       </div>
     </div>

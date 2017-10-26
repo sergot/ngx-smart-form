@@ -5,11 +5,13 @@ import { NgxSmartFormModule } from '../src';
 import { AppComponent } from './app.component';
 
 import { BasicComponent } from './basic/basic.component';
+import { ValidatorsComponent } from './validators/validators.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BasicComponent
+    BasicComponent,
+    ValidatorsComponent
   ],
   imports: [BrowserModule, NgxSmartFormModule],
   bootstrap: [AppComponent]

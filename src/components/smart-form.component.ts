@@ -59,7 +59,7 @@ export class SmartFormComponent implements OnInit {
         this.inputs.push(input);
 
         // XXX: allow default value (forms that edit an object)
-        this.smartForm.addControl(input.name, new FormControl());
+        this.smartForm.addControl(input.name, new FormControl(null, input.validators));
       }
     }
   }
