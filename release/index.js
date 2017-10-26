@@ -1,5 +1,5 @@
 /**
- * angular2-data-table v"0.2.0" (https://github.com/swimlane/angular2-data-table)
+ * angular2-data-table v"0.3.0" (https://github.com/swimlane/angular2-data-table)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -1351,7 +1351,7 @@ __export(__webpack_require__("./src/components/smart-form.component.ts"));
 /***/ "./src/components/smart-form.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form [formGroup]=\"smartForm\" (ngSubmit)=\"callOnSubmit()\">\r\n  <div *ngFor=\"let input of inputs\" class=\"form-group\">\r\n    <label [for]=\"input.name\">{{ input.label }}</label>\r\n\r\n    <select *ngIf=\"input.type === 'select'\" [formControlName]=\"input.name\" class=\"form-control\">\r\n      <option *ngFor=\"let i of input.data\" [value]=\"i.value\">{{ i.text }}</option>\r\n    </select>\r\n\r\n    <input *ngIf=\"input.type === 'text'\" [formControlName]=\"input.name\" [name]=\"input.name\" [id]=\"input.name\" [type]=\"input.type\"\r\n      [placeholder]=\"input.placeholder || ''\" class=\"form-control\">\r\n  </div>\r\n  <button class=\"btn btn-primary\" type=\"submit\">{{ settings.buttons.submit.value }}</button>\r\n</form>"
+module.exports = "<form [formGroup]=\"smartForm\" (ngSubmit)=\"callOnSubmit()\">\r\n  <div *ngFor=\"let input of inputs\" class=\"form-group\">\r\n    <label [for]=\"input.name\">{{ input.label }}</label>\r\n\r\n    <!-- XXX: multiple -->\r\n    <select *ngIf=\"input.type === 'select'\" [formControlName]=\"input.name\" class=\"form-control\">\r\n      <option *ngFor=\"let i of input.data\" [value]=\"i.value\">{{ i.text }}</option>\r\n    </select>\r\n\r\n    <textarea *ngIf=\"input.type === 'textarea'\" [formControlName]=\"input.name\" class=\"form-control\"></textarea>\r\n\r\n    <input *ngIf=\"input.type === 'text' || input.type === 'email'\" [formControlName]=\"input.name\" [name]=\"input.name\" [id]=\"input.name\"\r\n      [type]=\"input.type\" [placeholder]=\"input.placeholder || ''\" class=\"form-control\">\r\n  </div>\r\n\r\n  <!-- XXX: validators -->\r\n  <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!smartForm.valid\">{{ settings.buttons.submit.value }}</button>\r\n</form>"
 
 /***/ }),
 
@@ -1413,7 +1413,7 @@ var SmartFormComponent = /** @class */ (function () {
                 input.name = name_1;
                 this.inputs.push(input);
                 // XXX: allow default value (forms that edit an object)
-                this.smartForm.addControl(input.name, new forms_1.FormControl());
+                this.smartForm.addControl(input.name, new forms_1.FormControl(null, input.validators));
             }
         }
     };

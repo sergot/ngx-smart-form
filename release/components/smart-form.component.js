@@ -28,7 +28,7 @@ var SmartFormComponent = /** @class */ (function () {
                 input.name = name_1;
                 this.inputs.push(input);
                 // XXX: allow default value (forms that edit an object)
-                this.smartForm.addControl(input.name, new forms_1.FormControl());
+                this.smartForm.addControl(input.name, new forms_1.FormControl(null, input.validators));
             }
         }
     };
