@@ -27,6 +27,16 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta http-equiv="cleartype" content="on">
 
+  <% if (htmlWebpackPlugin.options.googleAnalytics && htmlWebpackPlugin.options.googleAnalytics.trackingId) { %>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.googleAnalytics.trackingId %>"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '<%= htmlWebpackPlugin.options.googleAnalytics.trackingId %>');
+    </script>
+  <% } %>
 </head>
 
 <body>
@@ -45,19 +55,6 @@
     crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
-
-  <% if (htmlWebpackPlugin.options.googleAnalytics) { %>
-    <script type="text/javascript">
-      window.GoogleAnalyticsObject = 'ga'; window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-      <% if (htmlWebpackPlugin.options.googleAnalytics.trackingId) { %>
-        ga('create', '<%= htmlWebpackPlugin.options.googleAnalytics.trackingId %>', 'auto');
-      <% } else { throw new Error("html-webpack-template requires googleAnalytics.trackingId config"); } %>
-      <% if (htmlWebpackPlugin.options.googleAnalytics.pageViewOnLoad) { %>
-        ga('send', 'pageview')
-      <% } %>
-    </script>
-    <script async defer src="https://www.google-analytics.com/analytics.js" type="text/javascript"></script>
-  <% } %>
 </body>
 
 </html>
