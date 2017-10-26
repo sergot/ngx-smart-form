@@ -5,7 +5,7 @@ import { NgxSmartFormModule } from '../src';
 import { AppComponent } from './app.component';
 
 import { BasicComponent } from './basic/basic.component';
-import { ValidatorsComponent } from './validators/validators.component';
+import { ValidatorsComponent } from './basic/validators.component';
 
 @NgModule({
   declarations: [
