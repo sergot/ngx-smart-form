@@ -44,7 +44,7 @@ module.exports = function (env) {
         chunksSortMode: 'dependency',
         title: 'ngx-smart-form',
         googleAnalytics: {
-          trackingId: 'UA-57474611-3',
+          trackingId: 'UA-108779313-1',
           pageViewOnLoad: true
         }
       }),
