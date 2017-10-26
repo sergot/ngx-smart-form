@@ -1,6 +1,6 @@
 {
   "name": "ngx-smart-form",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "ngx-smart-form is a Angular2+ form components which lets you generate forms easily.",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
