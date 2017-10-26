@@ -2,12 +2,17 @@
   <div *ngFor="let input of inputs" class="form-group">
     <label [for]="input.name">{{ input.label }}</label>
 
+    <!-- XXX: multiple -->
     <select *ngIf="input.type === 'select'" [formControlName]="input.name" class="form-control">
       <option *ngFor="let i of input.data" [value]="i.value">{{ i.text }}</option>
     </select>
 
-    <input *ngIf="input.type === 'text'" [formControlName]="input.name" [name]="input.name" [id]="input.name" [type]="input.type"
-      [placeholder]="input.placeholder || ''" class="form-control">
+    <textarea *ngIf="input.type === 'textarea'" [formControlName]="input.name" class="form-control"></textarea>
+
+    <input *ngIf="input.type === 'text' || input.type === 'email'" [formControlName]="input.name" [name]="input.name" [id]="input.name"
+      [type]="input.type" [placeholder]="input.placeholder || ''" class="form-control">
   </div>
-  <button class="btn btn-primary" type="submit">{{ settings.buttons.submit.value }}</button>
+
+  <!-- XXX: validators -->
+  <button class="btn btn-primary" type="submit" [disabled]="!smartForm.valid">{{ settings.buttons.submit.value }}</button>
 </form>

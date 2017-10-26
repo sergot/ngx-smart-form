@@ -35,9 +35,17 @@ export class BasicComponent {
           { value: '2', text: 'John Snow' },
         ],
       },
+      email: {
+        label: 'E-mail',
+        type: 'email',
+      },
       licensePlate: {
         label: 'License Plate',
         type: 'text',
+      },
+      desc: {
+        label: 'Description',
+        type: 'textarea',
       },
     },
   };
