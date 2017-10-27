@@ -5,10 +5,15 @@ export declare class BasicComponent {
             ownerId: {
                 label: string;
                 type: string;
-                data: {
-                    value: string;
-                    text: string;
-                }[];
+                config: {
+                    select: {
+                        options: {
+                            value: string;
+                            text: string;
+                        }[];
+                        multiple: boolean;
+                    };
+                };
             };
             email: {
                 label: string;
