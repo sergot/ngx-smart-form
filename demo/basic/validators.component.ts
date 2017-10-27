@@ -9,7 +9,7 @@ import { Validators } from '@angular/forms';
       <div class="row">
         <div class="col-sm-12">
           <h3>Validators Example</h3>
-          <p>This example shows the simpliest form with a simple action onSubmit().</p>
+          <p>This example shows the simpliest form with a simple action onSubmit() and validation of email field.</p>
           <ngx-smart-form [settings]="settings" (onSubmit)="onSubmit($event)"></ngx-smart-form>
         </div>
       </div>
@@ -31,20 +31,21 @@ export class ValidatorsComponent {
       ownerId: {
         label: 'Owner',
         type: 'select',
-        data: [
-          { value: '1', text: 'Jon Snow' },
-          { value: '2', text: 'John Snow' },
-        ],
+
+        config: {
+          select: {
+            options: [
+              { value: '', text: '- select option -' },
+              { value: '1', text: 'Jon Snow' },
+              { value: '2', text: 'John Snow' },
+            ],
+          },
+        },
       },
       email: {
         label: 'E-mail',
         type: 'email',
         validators: [Validators.email],
-      },
-      licensePlate: {
-        label: 'License Plate',
-        type: 'text',
-        validators: [Validators.required],
       },
       desc: {
         label: 'Description',

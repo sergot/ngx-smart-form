@@ -30,10 +30,15 @@ export class BasicComponent {
       ownerId: {
         label: 'Owner',
         type: 'select',
-        data: [
-          { value: '1', text: 'Jon Snow' },
-          { value: '2', text: 'John Snow' },
-        ],
+        config: {
+          select: {
+            options: [
+              { value: '1', text: 'Jon Snow' },
+              { value: '2', text: 'John Snow' },
+            ],
+            multiple: true,
+          },
+        },
       },
       email: {
         label: 'E-mail',

@@ -2,9 +2,9 @@
   <div *ngFor="let input of inputs" class="form-group">
     <label [for]="input.name">{{ input.label }}</label>
 
-    <!-- XXX: multiple -->
-    <select *ngIf="input.type === 'select'" [formControlName]="input.name" class="form-control">
-      <option *ngFor="let i of input.data" [value]="i.value">{{ i.text }}</option>
+    <!-- XXX: why does it return selected as array, when there's on 'multiple' attr -->
+    <select *ngIf="input.type === 'select'" [formControlName]="input.name" class="form-control" [multiple]="input.config?.select?.multiple">
+      <option *ngFor="let i of input.config?.select?.options" [value]="i.value">{{ i.text }}</option>
     </select>
 
     <textarea *ngIf="input.type === 'textarea'" [formControlName]="input.name" class="form-control"></textarea>

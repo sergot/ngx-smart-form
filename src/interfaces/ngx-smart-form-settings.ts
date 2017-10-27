@@ -1,4 +1,4 @@
 export interface NgxSmartFormSettings {
-  inputs?: Object;
-  buttons?: Object;
+  inputs?: object;
+  buttons?: object;
 }
