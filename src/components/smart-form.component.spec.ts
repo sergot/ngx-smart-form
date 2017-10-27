@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { SmartFormComponent } from './smart-form.component';
 import { NgxSmartFormModule } from '../ngx-smart-form.module';
@@ -54,7 +54,7 @@ describe('SmartForm component', () => {
   }));
 
   // XXX: more tests
-  describe('When full settings are defined', () => {
+  describe('When input\'s settings are defined without validators', () => {
     beforeEach(async(() => {
       const settings = {
         inputs: {
@@ -87,6 +87,10 @@ describe('SmartForm component', () => {
       expect(page.submitBtn.nativeElement.innerText).toBe('Save');
     });
 
+    it('should have submit button enabled', () => {
+      expect(page.submitBtn.nativeElement.disabled).toBe(false);
+    });
+
     it('should generate form with inputs and labels', () => {
       const howMany = Object.keys(comp.settings.inputs).length;
 
@@ -103,6 +107,32 @@ describe('SmartForm component', () => {
       page.submitBtn.nativeElement.click();
 
       expect(comp.onSubmit.emit).toHaveBeenCalledWith({ field: value });
+    });
+  });
+
+  describe('When validators are set', () => {
+    beforeEach(async(() => {
+      const settings = {
+        inputs: {
+          field: {
+            label: 'Field',
+            type: 'text',
+            validators: [Validators.required]
+          },
+        },
+
+        buttons: {
+          submit: {
+            value: 'Save',
+          },
+        },
+      };
+
+      createComponent(settings);
+    }));
+
+    it('should disable the button when form is invalid', () => {
+      expect(page.submitBtn.nativeElement.disabled).toBe(true);
     });
   });
 
