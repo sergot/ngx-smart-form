@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 
 import { BasicComponent } from './basic/basic.component';
 import { ValidatorsComponent } from './basic/validators.component';
+import { DynamicComponent } from './basic/dynamic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicComponent,
-    ValidatorsComponent
+    ValidatorsComponent,
+    DynamicComponent
   ],
   imports: [BrowserModule, NgxSmartFormModule],
   bootstrap: [AppComponent]
