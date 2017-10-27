@@ -136,7 +136,7 @@ describe('SmartForm component', () => {
     });
   });
 
-  describe('When full settings are not defined', () => {
+  describe('When settings are not defined', () => {
     beforeEach(async(() => {
       const settings = {};
 
